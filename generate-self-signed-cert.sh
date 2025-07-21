@@ -23,3 +23,5 @@ else
         -keyout "$KEY_FILE" -out "$CERT_FILE" \
         -subj "/C=US/ST=Denial/L=Nowhere/O=Net/CN=localhost"
     echo "自签名证书和密钥已生成。"
+
+fi
