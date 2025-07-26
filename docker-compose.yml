@@ -3,6 +3,7 @@ services:
     image: openresty/openresty:1.21.4.1-focal
     container_name: openresty
     restart: always
+    user: root
     ports:
       - "80:80"
       - "443:443"
