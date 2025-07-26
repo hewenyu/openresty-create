@@ -66,7 +66,7 @@ echo "目录 '$DOMAIN_SSL_DIR' 已创建。"
 # --- 步骤 3: 生成并加载临时配置以进行 ACME 验证 ---
 echo "步骤 3/6: 正在生成临时配置以进行 ACME 验证..."
 # 只生成用于 ACME 验证的 server 块
-awk '/server {/,/}/' "$TEMPLATE_FILE" | sed -n '/listen 80;/,/}/p' | sed "s/__DOMAIN__/$DOMAIN/g" > "$DOMAIN_CONF_FILE"
+awk 'BEGIN{p=0} /server *{/{p=1} p{print} /}/{if(p)exit}' "$TEMPLATE_FILE" | sed "s/__DOMAIN__/$DOMAIN/g" > "$DOMAIN_CONF_FILE"
 reload_openresty
 
 # --- 步骤 4: 申请 SSL 证书 ---
